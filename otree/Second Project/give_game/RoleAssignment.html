@@ -1,0 +1,34 @@
+{{ block title }}
+    Role Assignment of game one
+{{ endblock }}
+
+{{ block content }}
+<p>You are randomly assignment as <strong>{{ player.role }}</strong>.</p>
+
+
+<p>
+    {{ if player.role == Constants.dictator_role }}
+    Being an dictator, you have been given a second payment of<strong>£7</strong>, but the other do not.
+    The other person does not have a decision to make - what happens depends on you alone.
+    You can either leave these second payments unchanged, or decrease your own, increasing the other person’s payment.
+    {{ else }}
+    Being an recipient, you only have a show-up fee of <strong>£4</strong> and you do not have decision to make.
+    But you can get an addition amount of money if the other people give you.
+    {{ endif }}
+</p>
+
+
+<p>
+    {{ if player.role == Constants.dictator_role }}
+    If you decrease your second payment, this increases the other person’s by the same amount.
+    For example, if you decrease your own by £1, the other person will receive £1 more.
+    The final payment for you will be<strong>£4+£6=£10</strong>, and the other will be<strong>£4+£1=£5</strong>.
+    {{ else }}
+    You final amount of money will be the show-up fee add the amount of money the other people give.
+    {{ endif }}
+</p>
+
+    {{ next_button }}
+{{ endblock }}
+
+

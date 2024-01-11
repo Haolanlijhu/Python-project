@@ -1,0 +1,21 @@
+{{ block title }}
+    Result of the game one
+{{ endblock }}
+<p>
+    {{ if player.role == Constants.dictator_role }}
+    You chose to give {{ group.send_amount }} to your matched partner.
+    {{ else }}
+    You received {{ group.send_amount }} from your matched partner.
+    {{ endif }}
+</p>
+
+<p>
+    Your payoff is {{ player.payoff }}
+</p>
+
+{{ block content }}
+
+    {{ next_button }}
+{{ endblock }}
+
+
