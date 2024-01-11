@@ -1,0 +1,26 @@
+{{ block title }}
+    Summary
+{{ endblock }}
+{{ block content }}
+<p>
+    {{ if player.role == Constants.dictator_role }}
+    You chose to give {{ group.take_amount }} to your matched partner.
+    {{ else }}
+    You received {{ group.take_amount }} from your matched partner.
+    {{ endif }}
+</p>
+
+<p>
+    Your payoff is {{ player.payoff }}
+</p>
+
+<p>
+    <strong>
+        All the games are end.
+        Thanks for taking this experiment, we appreciate your help very much.
+    </strong>
+</p>
+    {{ formfields }}
+    {{ next_button }}
+
+{{ endblock }}

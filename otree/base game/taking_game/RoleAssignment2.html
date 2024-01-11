@@ -1,0 +1,37 @@
+{{ block title }}
+    Role Assignment of game two
+{{ endblock }}
+{{ block content }}
+<p>In the second game, You will be <strong>{{ player.role }}</strong>.</p>
+
+<p>
+    {{ if player.role == Constants.dictator_role }}
+    In this game, you will also be given <strong>£7</strong>, and you have three options:
+    You can either leave these second payments unchanged,
+    <strong>increase your own by decreasing the other person’s payment</strong>,
+    or decrease your own, increasing the other person’s payment.
+    The max amount of money you can increase your own will be <strong>£2</strong>.
+    {{ else }}
+    In this game, you will not receive any addition amount of money and do not have any decision to make.
+    But different from the first game, other people have a option that they can take money from your and increase their own.
+    The max amount of money the other people take from you will be <strong>£2</strong>.
+    {{ endif }}
+</p>
+
+<P>
+     {{ if player.role == Constants.dictator_role }}
+    If you decrease your second payment, this increases the other person’s by the same amount.
+    For example, if you decrease your own by £1, leaving £6 second payment for yourself, the other person will receive £1 more.
+    If you increase your own, this decreases the other person’s payment by the same amount.
+    For example, if you increase your payment by £1, you will get £8 second payment and they will receive £-1 (that is, they will have £1 deducted from their initial £4).
+    {{ else }}
+    If other people take £1 from you, you will finally receive £1.(that is, you will have £1 deducted from their initial £4).
+    If other people give £1 to you, you will finally receive £5.
+    {{ endif }}
+
+</P>
+
+    {{ formfields }}
+    {{ next_button }}
+
+{{ endblock }}
