@@ -69,25 +69,33 @@ MG = MG.astype(int)
 # buy_frequency是购买次数，observe_frequency是留存周期的浏览次数（！=0即表明出现过浏览）
 
 #计算MCC
-MCC_values = []
-for i in range(1,11):
-    TP = 0
-    FP = 0
-    TN = 0
-    FN = 0
-    for j in range(len(MG['buy_frequency'])):
-        if MG.iloc[j, 1] < i & MG.iloc[j, 2] != 0:
-            FN += 1
-        elif MG.iloc[j, 1] >= i & MG.iloc[j, 2] != 0:
-            TP += 1
-        elif MG.iloc[j, 1] < i & MG.iloc[j, 2] == 0:
-            TN += 1
-        elif MG.iloc[j, 1] >= i & MG.iloc[j, 2] == 0:
-            FP += 1
-    MCC = calculate_data(TP, FP, FN, TN)
-    MCC_values.append(MCC)
-print(MCC_values)
+for i in range(0, 10):
+    # FN <i次，留存
+    FN = len(MG[(MG['购买次数'] < i) & (MG['是否次日留存'] == 1)])
 
+    # TP >=i次，留存
+    TP = len(MG[(MG['购买次数'] >= i) & (MG['是否次日留存'] == 1)])
+
+    # TN <i次，不留存
+    TN = len(MG[(MG['购买次数'] < i) & (MG['是否次日留存'] == 0)])
+
+    # FP >=i次，不留存
+    FP = len(MG[(MG['购买次数'] >= i) & (MG['是否次日留存'] == 0)])
+
+    try:
+        MCC = (TP * TN  - FP * FN) / (ma.sqrt((TP+FP) * (TP+FN) * (TN+FP) * (TN+FN)))
+        print('i: %s MCC: %s' % (i, MCC))
+    except Exception as e:
+        print (e)
+        # 如果出现异常，多半就是除数为0了。
+        continue
+
+    # 保存当前最大值
+    if MCC > max_MCC:
+        max_MCC = MCC
+        max_i = i
+
+print('MCC 最大为 %s 对应的i为 %d' % (max_MCC, max_i))
 
 
 
