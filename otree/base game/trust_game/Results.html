@@ -1,0 +1,24 @@
+{{ block title }}
+    Page title
+{{ endblock }}
+
+{{ block content }}
+
+<p>
+    {{ if player.role == Constants.trustor_role }}
+        You chose to give your matched partner <em>{{ group.send_amount}}</em>. Your matched partner returned
+        <em>{{ group.return_amount}}</em> to you.
+    {{ else }}
+        Your matched partner gave you <em>{{ group.send_amount }}</em>. You decided to send back
+    <em>{{ group.return_amount }}</em>.
+    {{ endif }}
+</p>
+
+<p>
+    Your payoff is <strong>{{ player.payoff }}</strong>.
+</p>
+
+    {{ next_button }}
+{{ endblock }}
+
+
