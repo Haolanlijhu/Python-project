@@ -1,0 +1,36 @@
+{{ block title }}
+    Page title
+{{ endblock }}
+
+{{ block content }}
+<p>You are: {{ player.role }}</p>
+
+{{ if player.role == Constants.principle_role }}
+    <p>
+        The wage you chose for the agent is: <strong>{{ group.wage }}</strong>.
+    </p>
+    <p>
+        The effort chosen by the agent is: <strong>{{ group.effort }}</strong>.
+    </p>
+
+{{ else }}
+    <p>
+        The wage chosen by the principle for you is: <strong>{{ group.wage }}</strong>.
+    </p>
+    <p>
+        The effort you chose is: <strong>{{ group.effort }}</strong>.
+    </p>
+    <p>
+        The corresponding cost is: <strong>{{ group.cost }}</strong>.
+    </p>
+{{ endif }}
+
+<p>
+    Your payoff is <strong>{{ player.payoff }}</strong>
+</p>
+
+
+    {{ next_button }}
+{{ endblock }}
+
+

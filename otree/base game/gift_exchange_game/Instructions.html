@@ -1,0 +1,31 @@
+{{ block title }}
+    Page title
+{{ endblock }}
+{{ block content }}
+    <p>Put your instructions here.</p>
+
+<p>Here's an example of the cost-effort table. Change the Constants.effort_levels and Constants.cost_levels to change
+    the numbers in the table below. </p>
+<div>
+    <table class="table">
+
+        <tr>
+            <td>Effort</td>
+            {{ for effort in Constants.effort_levels }}
+                <td>{{ effort }}</td>
+            {{ endfor }}
+        </tr>
+        <tr>
+            <td>Cost</td>
+            {{ for cost in Constants.cost_levels }}
+                <td>{{ cost }}</td>
+            {{ endfor }}
+        </tr>
+
+    </table>
+</div>
+
+    {{ formfields }}
+    {{ next_button }}
+
+{{ endblock }}
